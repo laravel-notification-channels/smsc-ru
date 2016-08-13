@@ -1,12 +1,12 @@
 # Smsc notifications channel for Laravel 5.3 [WIP]
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/sms-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/sms-ru)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/laravel-notification-channels/pusher-push-notifications/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/pusher-push-notifications)
+[![Build Status](https://img.shields.io/travis/laravel-notification-channels/sms-ru/master.svg?style=flat-square)](https://travis-ci.org/laravel-notification-channels/sms-ru)
 [![StyleCI](https://styleci.io/repos/xxx/shield)](https://styleci.io/repos/xxx)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxx)
-[![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/pusher-push-notifications)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/pusher-push-notifications.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/pusher-push-notifications)
+[![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/sms-ru.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/sms-ru)
+[![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/sms-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/sms-ru)
 
 This package makes it easy to send notifications using [Smsc](smsc.ru) (aka СМС–Центр) with Laravel 5.3.
 
