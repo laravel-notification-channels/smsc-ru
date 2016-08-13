@@ -24,6 +24,7 @@ class SmscRuMessage implements Arrayable
      * Create a new message instance.
      *
      * @param  string $content
+     *
      * @return static
      */
     public static function create($content = '')
@@ -73,8 +74,8 @@ class SmscRuMessage implements Arrayable
     public function toArray()
     {
         $params = [
-            'mes' => $this->content,
             'charset' => 'utf-8',
+            'mes'     => $this->content,
         ];
 
         if (! empty($this->from)) {

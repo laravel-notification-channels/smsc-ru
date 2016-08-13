@@ -19,7 +19,7 @@ class SmscRuChannel
     /**
      * Send the given notification.
      *
-     * @param  mixed    $notifiable
+     * @param  mixed  $notifiable
      * @param  \Illuminate\Notifications\Notification  $notification
      *
      * @throws  \NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification
