@@ -74,7 +74,7 @@ class SmscRuMessage implements Arrayable
     {
         $params = [
             'mes' => $this->content,
-            'charset' => 'utf-8'
+            'charset' => 'utf-8',
         ];
 
         if (! empty($this->from)) {
