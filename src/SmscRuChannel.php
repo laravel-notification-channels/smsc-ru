@@ -2,11 +2,9 @@
 
 namespace NotificationChannels\SmscRu;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\Events\SendingMessage;
 use NotificationChannels\SmscRu\Events\MessageWasSent;
-use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuChannel
 {

@@ -2,7 +2,6 @@
 
 namespace NotificationChannels\SmscRu;
 
-use Exception;
 use DomainException;
 use GuzzleHttp\Client as HttpClient;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
@@ -70,5 +69,4 @@ class SmscRuApi
             throw CouldNotSendNotification::serviceRespondedWithAnError($exception);
         }
     }
-
 }

@@ -5,7 +5,7 @@ namespace NotificationChannels\SmscRu\Test;
 use PHPUnit_Framework_TestCase;
 use NotificationChannels\SmscRu\SmscRuMessage;
 
-class SmscRuMessageTest extends PHPUnit_Framework_TestCase
+class SmsCentreMessageTest extends PHPUnit_Framework_TestCase
 {
     /** @var SmscRuMessage */
     protected $message;
@@ -32,6 +32,7 @@ class SmscRuMessageTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('hello', $this->message->content);
     }
+
     /** @test */
     public function it_can_set_the_from()
     {
