@@ -1,18 +1,18 @@
 <?php
 
-namespace NotificationChannels\SmsCentre;
+namespace NotificationChannels\SmscRu;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\SmsCentre\Events\SendingMessage;
-use NotificationChannels\SmsCentre\Events\MessageWasSent;
-use NotificationChannels\SmsCentre\Exceptions\CouldNotSendNotification;
+use NotificationChannels\SmscRu\Events\SendingMessage;
+use NotificationChannels\SmscRu\Events\MessageWasSent;
+use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
-class SmsCentreChannel
+class SmscRuChannel
 {
     protected $smsc;
 
-    public function __construct(SmsCentre $smsc)
+    public function __construct(SmscRuApi $smsc)
     {
         $this->smsc = $smsc;
     }
@@ -35,11 +35,11 @@ class SmsCentreChannel
             return;
         }
 
-        /** @var SmsCentreMessage $message */
-        $message = $notification->toSmsCentre($notifiable);
+        /** @var SmscRuMessage $message */
+        $message = $notification->toSmscRu($notifiable);
 
         if (is_string($message)) {
-            $message = new SmsCentreMessage($message);
+            $message = new SmscRuMessage($message);
         }
 
         $this->smsc->send($to, $message->toArray());

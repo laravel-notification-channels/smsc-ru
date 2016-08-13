@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\SmsCentre\Events;
+namespace NotificationChannels\SmscRu\Events;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;

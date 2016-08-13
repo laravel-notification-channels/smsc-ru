@@ -1,11 +1,11 @@
-# SmsCentre notifications channel for Laravel 5.3 [WIP]
+# Smsc notifications channel for Laravel 5.3 [WIP]
 
-This package makes it easy to send notifications using [SmsCentre](smscentre.com) (aka СМС–Центр) with Laravel 5.3.
+This package makes it easy to send notifications using [Smsc](smsc.ru) (aka СМС–Центр) with Laravel 5.3.
 
 ## Contents
 
 - [Installation](#installation)
-    - [Setting up the SmsCentre service](#setting-up-the-SmsCentre-service)
+    - [Setting up the SmscRu service](#setting-up-the-SmscRu-service)
 - [Usage](#usage)
     - [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
@@ -29,13 +29,13 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\SmsCentre\SmsCentreServiceProvider::class,
+    NotificationChannels\SmscRu\SmscRuServiceProvider::class,
 ];
 ```
 
-### Setting up the SmsCentre service
+### Setting up the SmscRu service
 
-Add your SmsCentre login, secret key (hashed password) and default sender name  to your `config/services.php`:
+Add your SmscRu login, secret key (hashed password) and default sender name  to your `config/services.php`:
 
 ```php
 // config/services.php
@@ -53,19 +53,19 @@ You can use the channel in your `via()` method inside the notification:
 
 ```php
 use Illuminate\Notifications\Notification;
-use NotificationChannels\SmsCentre\SmsCentreMessage;
-use NotificationChannels\SmsCentre\SmsCentreChannel;
+use NotificationChannels\SmscRu\SmscRuMessage;
+use NotificationChannels\SmscRu\SmscRuChannel;
 
 class AccountApproved extends Notification
 {
     public function via($notifiable)
     {
-        return [SmsCentreChannel::class];
+        return [SmscRuChannel::class];
     }
 
-    public function toSmsCentre($notifiable)
+    public function toSmscRu($notifiable)
     {
-        return (new SmsCentreMessage())
+        return (new SmscRuMessage())
             ->content("Your {$notifiable->service} account was approved!");
     }
 }

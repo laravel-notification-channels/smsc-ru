@@ -1,8 +1,8 @@
 {
-    "name": "laravel-notification-channels/smscentre",
-    "description": "SmsCentre Notifications driver.",
-    "keywords": ["laravel", "notifications", "smscentre", "СМС-Центр"],
-    "homepage": "https://github.com/laravel-notification-channels/smscentre",
+    "name": "laravel-notification-channels/smsc-ru",
+    "description": "SmscRu Notifications driver.",
+    "keywords": ["laravel", "notifications", "smscentre", "smsc", "СМС-Центр"],
+    "homepage": "https://github.com/laravel-notification-channels/smsc-ru",
     "license": "MIT",
     "authors": [
         {
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\SmsCentre\\": "src"
+            "NotificationChannels\\SmscRu\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\SmsCentre\\Test\\": "tests"
+            "NotificationChannels\\SmscRu\\Test\\": "tests"
         }
     },
     "config": {

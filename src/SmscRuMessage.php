@@ -1,10 +1,10 @@
 <?php
 
-namespace NotificationChannels\SmsCentre;
+namespace NotificationChannels\SmscRu;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class SmsCentreMessage implements Arrayable
+class SmscRuMessage implements Arrayable
 {
     /**
      * The phone number the message should be sent from.

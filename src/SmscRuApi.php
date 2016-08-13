@@ -1,14 +1,13 @@
 <?php
 
-namespace NotificationChannels\SmsCentre;
+namespace NotificationChannels\SmscRu;
 
 use Exception;
 use DomainException;
 use GuzzleHttp\Client as HttpClient;
-use Psr\Http\Message\ResponseInterface;
-use NotificationChannels\SmsCentre\Exceptions\CouldNotSendNotification;
+use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
-class SmsCentre
+class SmscRuApi
 {
     const FORMAT_JSON = 3;
 
@@ -42,7 +41,7 @@ class SmsCentre
      * @param  string  $recipient
      * @param  array   $params
      *
-     * @return ResponseInterface
+     * @return array
      *
      * @throws CouldNotSendNotification
      */

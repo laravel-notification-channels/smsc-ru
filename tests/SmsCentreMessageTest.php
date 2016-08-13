@@ -1,14 +1,14 @@
 <?php
 
-namespace NotificationChannels\SmsCentre\Test;
+namespace NotificationChannels\SmscRu\Test;
 
 use PHPUnit_Framework_TestCase;
-use NotificationChannels\SmsCentre\SmsCentreMessage;
+use NotificationChannels\SmscRu\SmscRuMessage;
 
-class SmsCentreMessageTest extends PHPUnit_Framework_TestCase
+class SmscRuMessageTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var SmsCentreMessage
+     * @var SmscRuMessage
      */
     protected $message;
 
@@ -16,13 +16,13 @@ class SmsCentreMessageTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->message = new SmsCentreMessage();
+        $this->message = new SmscRuMessage();
     }
 
     /** @test */
     public function it_can_accept_a_content_when_constructing_a_message()
     {
-        $message = new SmsCentreMessage('hello');
+        $message = new SmscRuMessage('hello');
 
         $this->assertEquals('hello', $message->content);
     }
