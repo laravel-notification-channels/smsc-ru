@@ -9,7 +9,7 @@ class SmscRuServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(SmscRuApi::class, function ($app) {
-            $config = config('services.msmscru');
+            $config = config('services.smscru');
 
             return new SmscRuApi($config['login'], $config['secret'], $config['sender']);
         });
