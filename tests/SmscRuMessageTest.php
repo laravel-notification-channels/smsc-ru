@@ -5,7 +5,7 @@ namespace NotificationChannels\SmscRu\Test;
 use PHPUnit_Framework_TestCase;
 use NotificationChannels\SmscRu\SmscRuMessage;
 
-class SmsCentreMessageTest extends PHPUnit_Framework_TestCase
+class SmscRuMessageTest extends PHPUnit_Framework_TestCase
 {
     /** @var SmscRuMessage */
     protected $message;
@@ -21,6 +21,14 @@ class SmsCentreMessageTest extends PHPUnit_Framework_TestCase
     public function it_can_accept_a_content_when_constructing_a_message()
     {
         $message = new SmscRuMessage('hello');
+
+        $this->assertEquals('hello', $message->content);
+    }
+
+    /** @test */
+    public function it_can_accept_a_content_when_creating_a_message()
+    {
+        $message = SmscRuMessage::create('hello');
 
         $this->assertEquals('hello', $message->content);
     }
