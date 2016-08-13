@@ -13,11 +13,4 @@ class CouldNotSendNotification extends Exception
             "Service responded with an error '{$exception->getCode()}: {$exception->getMessage()}'"
         );
     }
-
-    public static function serviceCommunicationError(Exception $exception)
-    {
-        return new static(
-            "The communication with service failed because {$exception->getMessage()}"
-        );
-    }
 }

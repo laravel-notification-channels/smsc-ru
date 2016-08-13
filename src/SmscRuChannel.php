@@ -10,6 +10,7 @@ use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuChannel
 {
+    /** @var \NotificationChannels\SmscRu\SmscRuApi */
     protected $smsc;
 
     public function __construct(SmscRuApi $smsc)
@@ -20,10 +21,10 @@ class SmscRuChannel
     /**
      * Send the given notification.
      *
-     * @param  Notifiable    $notifiable
-     * @param  Notification  $notification
+     * @param  mixed    $notifiable
+     * @param  \Illuminate\Notifications\Notification  $notification
      *
-     * @throws CouldNotSendNotification
+     * @throws  \NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
@@ -35,7 +36,6 @@ class SmscRuChannel
             return;
         }
 
-        /** @var SmscRuMessage $message */
         $message = $notification->toSmscRu($notifiable);
 
         if (is_string($message)) {
@@ -50,12 +50,12 @@ class SmscRuChannel
     /**
      * Check if we can send the notification.
      *
-     * @param  Notifiable    $notifiable
-     * @param  Notification  $notification
+     * @param      $notifiable
+     * @param \Illuminate\Notifications\Notification $notification
      *
      * @return bool
      */
-    protected function shouldSendMessage($notifiable, $notification)
+    protected function shouldSendMessage($notifiable, Notification $notification)
     {
         return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }

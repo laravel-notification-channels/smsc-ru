@@ -11,18 +11,19 @@ class SmscRuApi
 {
     const FORMAT_JSON = 3;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $apiUrl = 'http://smsc.ru/sys/send.php';
 
-    /**
-     * @var HttpClient
-     */
+    /** @var HttpClient */
     protected $httpClient;
 
+    /** @var string */
     protected $login;
+
+    /** @var string */
     protected $secret;
+
+    /** @var string */
     protected $sender;
 
     public function __construct($login, $secret, $sender)
@@ -67,8 +68,6 @@ class SmscRuApi
             return $response;
         } catch (DomainException $exception) {
             throw CouldNotSendNotification::serviceRespondedWithAnError($exception);
-        } catch (Exception $exception) {
-            throw CouldNotSendNotification::serviceCommunicationError($exception);
         }
     }
 

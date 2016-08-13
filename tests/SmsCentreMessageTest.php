@@ -7,9 +7,7 @@ use NotificationChannels\SmscRu\SmscRuMessage;
 
 class SmscRuMessageTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var SmscRuMessage
-     */
+    /** @var SmscRuMessage */
     protected $message;
 
     public function setUp()
