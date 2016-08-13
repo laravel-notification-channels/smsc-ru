@@ -40,9 +40,9 @@ Add your SmscRu login, secret key (hashed password) and default sender name  to 
 ```php
 // config/services.php
 
-'smscentre' => [
-    'login'  => env('SMSCENTRE_LOGIN'),
-    'secret' => env('SMSCENTRE_SECRET'),
+'smscru' => [
+    'login'  => env('SMSCRU_LOGIN'),
+    'secret' => env('SMSCRU_SECRET'),
     'sender' => 'John_Doe'
 ]
 ```

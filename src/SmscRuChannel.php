@@ -31,7 +31,7 @@ class SmscRuChannel
             return;
         }
 
-        if (! $to = $notifiable->routeNotificationFor('smscentre')) {
+        if (! $to = $notifiable->routeNotificationFor('smscru')) {
             return;
         }
 
