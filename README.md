@@ -21,7 +21,7 @@ This package makes it easy to send notifications using [Smsc](smsc.ru) (aka СМ
 You can install the package via composer:
 
 ```bash
-composer require laravel-notification-channels/smscentre
+composer require laravel-notification-channels/smsc-ru
 ```
 
 You must install the service provider:
