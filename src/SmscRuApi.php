@@ -11,7 +11,7 @@ class SmscRuApi
     const FORMAT_JSON = 3;
 
     /** @var string */
-    protected $apiUrl = 'http://smsc.ru/sys/send.php';
+    protected $apiUrl = 'https://smsc.ru/sys/send.php';
 
     /** @var HttpClient */
     protected $httpClient;
