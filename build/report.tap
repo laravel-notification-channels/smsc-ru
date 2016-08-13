@@ -1,4 +1,0 @@
-TAP version 13
-ok 1 - NotificationChannels\SmscRu\Test\SmscRuMessageTest::it_can_accept_a_content_when_constructing_a_message
-ok 2 - NotificationChannels\SmscRu\Test\SmscRuMessageTest::it_can_set_the_content
-ok 3 - NotificationChannels\SmscRu\Test\SmscRuMessageTest::it_can_set_the_from
