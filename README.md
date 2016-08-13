@@ -38,7 +38,7 @@ You must install the service provider:
 'providers' => [
     ...
     NotificationChannels\SmscRu\SmscRuServiceProvider::class,
-];
+],
 ```
 
 ### Setting up the SmscRu service
@@ -47,12 +47,13 @@ Add your SmscRu login, secret key (hashed password) and default sender name  to 
 
 ```php
 // config/services.php
-
+...
 'smscru' => [
     'login'  => env('SMSCRU_LOGIN'),
     'secret' => env('SMSCRU_SECRET'),
     'sender' => 'John_Doe'
-]
+],
+...
 ```
 
 ## Usage
