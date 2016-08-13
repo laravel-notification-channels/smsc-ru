@@ -83,6 +83,20 @@ class AccountApproved extends Notification
 
 TODO
 
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Testing
+    
+``` bash
+$ composer test
+```
+
+## Security
+
+If you discover any security related issues, please email themsaid@gmail.com instead of using the issue tracker.
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
