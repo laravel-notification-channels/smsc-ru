@@ -2,21 +2,11 @@
 
 namespace NotificationChannels\SmscRu\Test;
 
-use PHPUnit_Framework_TestCase;
+use Orchestra\Testbench\TestCase;
 use NotificationChannels\SmscRu\SmscRuMessage;
 
-class SmscRuMessageTest extends PHPUnit_Framework_TestCase
+class SmscRuMessageTest extends TestCase
 {
-    /** @var SmscRuMessage */
-    protected $message;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->message = new SmscRuMessage();
-    }
-
     /** @test */
     public function it_can_accept_a_content_when_constructing_a_message()
     {
@@ -36,28 +26,30 @@ class SmscRuMessageTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_set_the_content()
     {
-        $this->message->content('hello');
+        $message = (new SmscRuMessage())->content('hello');
 
-        $this->assertEquals('hello', $this->message->content);
+        $this->assertEquals('hello', $message->content);
     }
 
     /** @test */
     public function it_can_set_the_from()
     {
-        $this->message->from('John_Doe');
+        $message = (new SmscRuMessage())->from('John_Doe');
 
-        $this->assertEquals('John_Doe', $this->message->from);
+        $this->assertEquals('John_Doe', $message->from);
     }
 
     /** @test */
     public function it_can_convert_self_to_array()
     {
-        $params = $this->message->toArray();
+        $message = (new SmscRuMessage())->content('hello')->from('John_Doe');
+
+        $params = $message->toArray();
 
         $this->assertArraySubset($params, [
             'charset' => 'utf-8',
-            'sender'  => $this->message->from,
-            'mes'     => $this->message->content,
+            'sender'  => 'John_Doe',
+            'mes'     => 'hello',
         ]);
     }
 }
