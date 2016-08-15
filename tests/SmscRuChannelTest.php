@@ -2,7 +2,6 @@
 
 namespace NotificationChannel\SmscRu\Tests;
 
-
 use Mockery;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Notifications\Notification;
