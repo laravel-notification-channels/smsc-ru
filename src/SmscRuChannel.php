@@ -26,10 +26,6 @@ class SmscRuChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $this->shouldSendMessage($notifiable, $notification)) {
-            return;
-        }
-
         if (! $to = $notifiable->routeNotificationFor('smscru')) {
             return;
         }
@@ -41,8 +37,6 @@ class SmscRuChannel
         }
 
         $this->smsc->send($to, $message->toArray());
-
-        event(new MessageWasSent($notifiable, $notification));
     }
 
     /**
