@@ -43,11 +43,8 @@ class SmscRuChannelTest extends TestCase
 
         $this->smsc = Mockery::mock(SmscRuApi::class);
         $this->channel = new SmscRuChannel($this->smsc);
-        $this->events = Mockery::mock(Dispatcher::class);
         $this->message = Mockery::mock(SmscRuMessage::class);
         $this->notification = Mockery::mock(Notification::class);
-
-        app()->instance('events', $this->events);
     }
 
     public function tearDown()
@@ -67,7 +64,6 @@ class SmscRuChannelTest extends TestCase
             'charset' => 'utf-8',
         ];
 
-        $this->events->shouldReceive('fire')->twice();
         $this->message->shouldReceive('toArray')->andReturn($data);
         $this->smsc->shouldReceive('send')->with('+1234567890', $data);
         $this->notification->shouldReceive('toSmscRu')->with($notifiable)->andReturn($this->message);
@@ -77,30 +73,10 @@ class SmscRuChannelTest extends TestCase
     }
 
     /** @test */
-    public function it_fires_events_while_sending_a_message()
-    {
-        $this->smsc->shouldReceive('send');
-        $this->message->shouldReceive('toArray');
-        $this->events->shouldReceive('fire')->twice();
-        $this->notification->shouldReceive('toSmscRu')->andReturn($this->message);
-        $this->channel->send(new Notifiable, $this->notification);
-    }
-
-    /** @test */
     public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notification()
     {
-        $this->events->shouldReceive('fire');
         $this->notification->shouldReceive('toSmscRu')->never();
         $this->channel->send(new NotifiableWithoutRouteNotificationForSmscru, $this->notification);
-    }
-
-    /** @test */
-    public function it_does_not_send_a_message_when_the_event_firing_returns_false()
-    {
-        $notifiable = Mockery::mock(Notifiable::class);
-        $this->events->shouldReceive('fire')->andReturn(false);
-        $notifiable->shouldReceive('routeNotificationFor')->never();
-        $this->channel->send($notifiable, $this->notification);
     }
 }
 
