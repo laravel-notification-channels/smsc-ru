@@ -5,7 +5,6 @@ namespace NotificationChannel\SmscRu\Tests;
 use Mockery;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Events\Dispatcher;
 use NotificationChannels\SmscRu\SmscRuApi;
 use NotificationChannels\SmscRu\SmscRuChannel;
 use NotificationChannels\SmscRu\SmscRuMessage;
