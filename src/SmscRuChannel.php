@@ -4,7 +4,6 @@ namespace NotificationChannels\SmscRu;
 
 use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\Events\SendingMessage;
-use NotificationChannels\SmscRu\Events\MessageWasSent;
 
 class SmscRuChannel
 {
