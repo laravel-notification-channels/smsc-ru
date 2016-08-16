@@ -18,11 +18,6 @@ class SmscRuChannelTest extends TestCase
     private $smsc;
 
     /**
-     * @var Dispatcher
-     */
-    private $events;
-
-    /**
      * @var SmscRuMessage
      */
     private $message;

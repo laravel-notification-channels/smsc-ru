@@ -3,7 +3,6 @@
 namespace NotificationChannels\SmscRu;
 
 use Illuminate\Notifications\Notification;
-use NotificationChannels\SmscRu\Events\SendingMessage;
 
 class SmscRuChannel
 {
@@ -36,18 +35,5 @@ class SmscRuChannel
         }
 
         $this->smsc->send($to, $message->toArray());
-    }
-
-    /**
-     * Check if we can send the notification.
-     *
-     * @param      $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @return bool
-     */
-    protected function shouldSendMessage($notifiable, Notification $notification)
-    {
-        return event(new SendingMessage($notifiable, $notification), [], true) !== false;
     }
 }
