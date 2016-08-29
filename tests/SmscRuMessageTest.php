@@ -2,10 +2,9 @@
 
 namespace NotificationChannels\SmscRu\Test;
 
-use Orchestra\Testbench\TestCase;
 use NotificationChannels\SmscRu\SmscRuMessage;
 
-class SmscRuMessageTest extends TestCase
+class SmscRuMessageTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
     public function it_can_accept_a_content_when_constructing_a_message()
@@ -37,19 +36,5 @@ class SmscRuMessageTest extends TestCase
         $message = (new SmscRuMessage())->from('John_Doe');
 
         $this->assertEquals('John_Doe', $message->from);
-    }
-
-    /** @test */
-    public function it_can_convert_self_to_array()
-    {
-        $message = (new SmscRuMessage())->content('hello')->from('John_Doe');
-
-        $params = $message->toArray();
-
-        $this->assertArraySubset($params, [
-            'charset' => 'utf-8',
-            'sender'  => 'John_Doe',
-            'mes'     => 'hello',
-        ]);
     }
 }

@@ -2,14 +2,14 @@
 
 namespace NotificationChannel\SmscRu\Tests;
 
-use Mockery;
-use Orchestra\Testbench\TestCase;
+use Mockery as M;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\SmscRuApi;
 use NotificationChannels\SmscRu\SmscRuChannel;
 use NotificationChannels\SmscRu\SmscRuMessage;
+use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
-class SmscRuChannelTest extends TestCase
+class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var SmscRuApi
@@ -31,50 +31,49 @@ class SmscRuChannelTest extends TestCase
      */
     private $notification;
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->smsc = Mockery::mock(SmscRuApi::class);
-        $this->channel = new SmscRuChannel($this->smsc);
-        $this->message = Mockery::mock(SmscRuMessage::class);
-        $this->notification = Mockery::mock(Notification::class);
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
-
-        parent::tearDown();
-    }
+//    public function setUp()
+//    {
+//        parent::setUp();
+//
+//        $this->smsc = Mockery::mock(SmscRuApi::class);
+//        $this->channel = new SmscRuChannel($this->smsc);
+//        $this->message = Mockery::mock(SmscRuMessage::class);
+//    }
+//
+//    public function tearDown()
+//    {
+//        Mockery::close();
+//    }
 
     /** @test */
     public function it_can_send_a_notification()
     {
-        $notifiable = new Notifiable;
+        $smsc = M::mock(SmscRuApi::class, ['test', 'test', 'John_Doe']);
 
-        $data = [
-            'mes'     => 'hello',
-            'charset' => 'utf-8',
-        ];
+        $smsc->shouldReceive('send')->once()
+            ->with(
+                [
+                    'phones'  => '+1234567890',
+                    'mes'     => 'hello',
+                    'sender'  => 'John_Doe',
+                ]
+            );
 
-        $this->message->shouldReceive('toArray')->andReturn($data);
-        $this->smsc->shouldReceive('send')->with('+1234567890', $data);
-        $this->notification->shouldReceive('toSmscRu')->with($notifiable)->andReturn($this->message);
-
-
-        $this->channel->send($notifiable, $this->notification);
+        $channel = new SmscRuChannel($smsc);
+        $channel->send(new TestNotifiable(), new TestNotification());
     }
 
     /** @test */
-    public function it_does_not_send_a_message_when_notifiable_does_not_have_route_notification()
+    public function it_does_not_send_a_message_when_to_missed()
     {
-        $this->notification->shouldReceive('toSmscRu')->never();
-        $this->channel->send(new NotifiableWithoutRouteNotificationForSmscru, $this->notification);
+        $this->expectException(CouldNotSendNotification::class);
+
+        $channel = new SmscRuChannel(M::mock(SmscRuApi::class));
+        $channel->send(new TestNotifiableWithoutRouteNotificationForSmscru(), new TestNotification());
     }
 }
 
-class Notifiable
+class TestNotifiable
 {
     public function routeNotificationFor()
     {
@@ -82,10 +81,18 @@ class Notifiable
     }
 }
 
-class NotifiableWithoutRouteNotificationForSmscru extends Notifiable
+class TestNotifiableWithoutRouteNotificationForSmscru extends TestNotifiable
 {
     public function routeNotificationFor()
     {
         return false;
+    }
+}
+
+class TestNotification extends Notification
+{
+    public function toSmscRu()
+    {
+        return SmscRuMessage::create('hello')->from('John_Doe');
     }
 }

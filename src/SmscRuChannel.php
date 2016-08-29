@@ -3,6 +3,7 @@
 namespace NotificationChannels\SmscRu;
 
 use Illuminate\Notifications\Notification;
+use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuChannel
 {
@@ -24,8 +25,10 @@ class SmscRuChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $to = $notifiable->routeNotificationFor('smscru')) {
-            return;
+        $to = $notifiable->routeNotificationFor('smscru');
+
+        if (empty($to)) {
+            throw CouldNotSendNotification::missingRecipient();
         }
 
         $message = $notification->toSmscRu($notifiable);
@@ -34,6 +37,21 @@ class SmscRuChannel
             $message = new SmscRuMessage($message);
         }
 
-        $this->smsc->send($to, $message->toArray());
+        $this->sendMessage($to, $message);
+    }
+
+    protected function sendMessage($recipient, SmscRuMessage $message)
+    {
+        if (mb_strlen($message->content) > 800) {
+            throw CouldNotSendNotification::contentLengthLimitExceeded();
+        }
+
+        $params = [
+            'phones'  => $recipient,
+            'mes'     => $message->content,
+            'sender'  => $message->from,
+        ];
+
+        $this->smsc->send($params);
     }
 }

@@ -1,4 +1,4 @@
-# Smsc notifications channel for Laravel 5.3 [WIP]
+# Smsc notifications channel for Laravel 5.3
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsc-ru)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -33,7 +33,7 @@ You can install the package via composer:
 composer require laravel-notification-channels/smsc-ru
 ```
 
-You must install the service provider:
+Then you must install the service provider:
 ```php
 // config/app.php
 'providers' => [
@@ -44,7 +44,7 @@ You must install the service provider:
 
 ### Setting up the SmscRu service
 
-Add your SmscRu login, secret key (hashed password) and default sender name  to your `config/services.php`:
+Add your SmscRu login, secret key (hashed password) and default sender name (or phone number) to your `config/services.php`:
 
 ```php
 // config/services.php
@@ -75,15 +75,16 @@ class AccountApproved extends Notification
 
     public function toSmscRu($notifiable)
     {
-        return (new SmscRuMessage())
-            ->content("Your {$notifiable->service} account was approved!");
+        return SmscRuMessage()::create("Task #{$notifiable->id} is complete!");
     }
 }
 ```
 
 ### Available methods
 
-TODO
+`from()`: Sets the sender's name or phone number.
+
+`content()`: Sets a content of the notification message.
 
 ## Changelog
 

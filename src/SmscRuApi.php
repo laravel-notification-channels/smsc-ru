@@ -38,22 +38,23 @@ class SmscRuApi
     }
 
     /**
-     * @param  string  $recipient
-     * @param  array   $params
+     * @param  array  $params
      *
      * @return array
      *
      * @throws CouldNotSendNotification
      */
-    public function send($recipient, $params)
+    public function send($params)
     {
-        $params = array_merge([
-            'phones' => $recipient,
-            'login'  => $this->login,
-            'psw'    => $this->secret,
-            'sender' => $this->sender,
-            'fmt'    => self::FORMAT_JSON,
-        ], $params);
+        $base = [
+            'charset' => 'utf-8',
+            'login'   => $this->login,
+            'psw'     => $this->secret,
+            'sender'  => $this->sender,
+            'fmt'     => self::FORMAT_JSON,
+        ];
+
+        $params = array_merge($base, $params);
 
         try {
             $response = $this->httpClient->post($this->apiUrl, ['form_params' => $params]);
@@ -66,7 +67,9 @@ class SmscRuApi
 
             return $response;
         } catch (DomainException $exception) {
-            throw CouldNotSendNotification::serviceRespondedWithAnError($exception);
+            throw CouldNotSendNotification::smscRespondedWithAnError($exception);
+        } catch (\Exception $exception) {
+            throw CouldNotSendNotification::couldNotCommunicateWithSmsc($exception);
         }
     }
 }

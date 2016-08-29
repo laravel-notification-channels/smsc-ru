@@ -1,6 +1,6 @@
 {
     "name": "laravel-notification-channels/smsc-ru",
-    "description": "SmscRu Notifications driver.",
+    "description": "SmscRu Notifications channel for Laravel 5.3.",
     "keywords": ["laravel", "notifications", "smscentre", "smsc", "СМС-Центр"],
     "homepage": "https://github.com/laravel-notification-channels/smsc-ru",
     "license": "MIT",
@@ -8,21 +8,21 @@
         {
             "name": "JhaoDa",
             "role": "Developer",
-            "email": "jhaoda@gmail.com"
+            "email": "jhaoda@gmail.com",
+            "homepage": "https://github.com/jhaoda"
         }
     ],
     "require": {
         "php": ">=5.6.4",
-        "guzzlehttp/guzzle": "~6.0",
-        "illuminate/queue": "^5.3@dev",
-        "illuminate/events": "^5.3@dev",
-        "illuminate/support": "^5.3@dev",
-        "illuminate/notifications": "^5.3@dev"
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^6.2",
+        "illuminate/queue": "^5.3",
+        "illuminate/notifications": "^5.3",
+        "illuminate/support": "^5.1|^5.2|^5.3"
     },
     "require-dev": {
-        "mockery/mockery": "~0.9",
-        "phpunit/phpunit": "~4.8|~5",
-        "orchestra/testbench": "~3.0"
+        "phpunit/phpunit": "^5.2",
+        "mockery/mockery": "^0.9.5"
     },
     "autoload": {
         "psr-4": {
@@ -39,6 +39,5 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
-    },
-    "minimum-stability": "dev"
+    }
 }

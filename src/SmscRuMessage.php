@@ -2,23 +2,21 @@
 
 namespace NotificationChannels\SmscRu;
 
-use Illuminate\Contracts\Support\Arrayable;
-
-class SmscRuMessage implements Arrayable
+class SmscRuMessage
 {
     /**
      * The phone number the message should be sent from.
      *
      * @var string
      */
-    public $from;
+    public $from = '';
 
     /**
      * The message content.
      *
      * @var string
      */
-    public $content;
+    public $content = '';
 
     /**
      * Create a new message instance.
@@ -66,22 +64,5 @@ class SmscRuMessage implements Arrayable
         $this->from = $from;
 
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $params = [
-            'charset' => 'utf-8',
-            'mes'     => $this->content,
-        ];
-
-        if (! empty($this->from)) {
-            $params = array_merge($params, ['sender' => $this->from]);
-        }
-
-        return $params;
     }
 }
