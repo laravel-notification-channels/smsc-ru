@@ -26,31 +26,26 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
      */
     private $channel;
 
-    /**
-     * @var Notification
-     */
-    private $notification;
+    public function setUp()
+    {
+        parent::setUp();
 
-//    public function setUp()
-//    {
-//        parent::setUp();
-//
-//        $this->smsc = Mockery::mock(SmscRuApi::class);
-//        $this->channel = new SmscRuChannel($this->smsc);
-//        $this->message = Mockery::mock(SmscRuMessage::class);
-//    }
-//
-//    public function tearDown()
-//    {
-//        Mockery::close();
-//    }
+        $this->smsc = M::mock(SmscRuApi::class, ['test', 'test', 'John_Doe']);
+        $this->channel = new SmscRuChannel($this->smsc);
+        $this->message = M::mock(SmscRuMessage::class);
+    }
+
+    public function tearDown()
+    {
+        M::close();
+
+        parent::tearDown();
+    }
 
     /** @test */
     public function it_can_send_a_notification()
     {
-        $smsc = M::mock(SmscRuApi::class, ['test', 'test', 'John_Doe']);
-
-        $smsc->shouldReceive('send')->once()
+        $this->smsc->shouldReceive('send')->once()
             ->with(
                 [
                     'phones'  => '+1234567890',
@@ -59,8 +54,7 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
                 ]
             );
 
-        $channel = new SmscRuChannel($smsc);
-        $channel->send(new TestNotifiable(), new TestNotification());
+        $this->channel->send(new TestNotifiable(), new TestNotification());
     }
 
     /** @test */
@@ -68,8 +62,9 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(CouldNotSendNotification::class);
 
-        $channel = new SmscRuChannel(M::mock(SmscRuApi::class));
-        $channel->send(new TestNotifiableWithoutRouteNotificationForSmscru(), new TestNotification());
+        $this->channel->send(
+            new TestNotifiableWithoutRouteNotificationForSmscru(), new TestNotification()
+        );
     }
 }
 
