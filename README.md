@@ -1,4 +1,4 @@
-# Smsc notifications channel for Laravel 5.3
+# Smsc notifications channel for Laravel 5.3+
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsc-ru)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/smsc-ru/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/smsc-ru/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsc-ru)
 
-This package makes it easy to send notifications using [smsc.ru](//smsc.ru) (aka СМС–Центр) with Laravel 5.3.
+This package makes it easy to send notifications using [smsc.ru](//smsc.ru) (aka СМС–Центр) with Laravel 5.3+.
 
 ## Contents
 
@@ -75,8 +75,17 @@ class AccountApproved extends Notification
 
     public function toSmscRu($notifiable)
     {
-        return SmscRuMessage()::create("Task #{$notifiable->id} is complete!");
+        return SmscRuMessage::create("Task #{$notifiable->id} is complete!");
     }
+}
+```
+
+In your notifiable model, make sure to include a routeNotificationForSmsRu() method, which return the phone number.
+
+```php
+public function routeNotificationForSmsRu()
+{
+    return $this->phone;
 }
 ```
 
