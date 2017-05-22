@@ -53,7 +53,7 @@ class SmscRuChannel
         ];
 
         if ($message->time) {
-            $params['time'] = '0' . $message->time;
+            $params['time'] = '0'.$message->time;
         }
 
         if ($message->tz) {
