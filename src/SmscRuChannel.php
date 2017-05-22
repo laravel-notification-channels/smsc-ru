@@ -52,27 +52,10 @@ class SmscRuChannel
             'sender'  => $message->from,
         ];
 
-        if ($message->time) {
-            $params['time'] = '0'.$message->time->getTimestamp();
-        }
-
-        if ($message->tz) {
-            $params['tz'] = $this->formatTimeZone($message->tz);
+        if ($message->sendAt) {
+            $params['time'] = '0'.$message->sendAt->getTimestamp();
         }
 
         $this->smsc->send($params);
-    }
-
-    /**
-     * Calculate SMSC.ru specific timezone difference.
-     *
-     * @param \DateTimeZone $tz
-     * @return int
-     */
-    protected function formatTimeZone(\DateTimeZone $tz)
-    {
-        $now = date_create();
-
-        return $tz->getOffset($now) - timezone_open('Europe/Moscow')->getOffset($now);
     }
 }

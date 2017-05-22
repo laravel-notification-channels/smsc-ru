@@ -39,20 +39,11 @@ class SmscRuMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_can_set_the_timestamp()
+    public function it_can_set_the_send_at()
     {
-        $timestamp = date_create();
-        $message = (new SmscRuMessage())->timestamp($timestamp);
+        $sendAt = date_create();
+        $message = (new SmscRuMessage())->sendAt($sendAt);
 
-        $this->assertEquals($timestamp, $message->time);
-    }
-
-    /** @test */
-    public function it_can_set_the_timezone()
-    {
-        $tz = timezone_open('Europe/Kiev');
-        $message = (new SmscRuMessage())->timezone($tz);
-
-        $this->assertEquals($tz, $message->tz);
+        $this->assertEquals($sendAt, $message->sendAt);
     }
 }

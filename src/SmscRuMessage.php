@@ -23,14 +23,7 @@ class SmscRuMessage
      *
      * @var \DateTime
      */
-    public $time;
-
-    /**
-     * Timezone of sending a message.
-     *
-     * @var \DateTimeZone
-     */
-    public $tz;
+    public $sendAt;
 
     /**
      * Create a new message instance.
@@ -83,27 +76,13 @@ class SmscRuMessage
     /**
      * Set the time the message should be sent.
      *
-     * @param  \DateTime|null  $time
+     * @param  \DateTime|null  $sendAt
      *
      * @return $this
      */
-    public function timestamp(\DateTime $time = null)
+    public function sendAt(\DateTime $sendAt = null)
     {
-        $this->time = $time;
-
-        return $this;
-    }
-
-    /**
-     * Set the timezone the message should be sent.
-     *
-     * @param  \DateTimeZone  $tz
-     *
-     * @return $this
-     */
-    public function timezone(\DateTimeZone $tz = null)
-    {
-        $this->tz = $tz;
+        $this->sendAt = $sendAt;
 
         return $this;
     }
