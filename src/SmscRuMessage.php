@@ -21,7 +21,7 @@ class SmscRuMessage
     /**
      * Time of sending a message.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     public $sendAt;
 
