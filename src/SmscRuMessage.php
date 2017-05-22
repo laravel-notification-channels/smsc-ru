@@ -76,11 +76,11 @@ class SmscRuMessage
     /**
      * Set the time the message should be sent.
      *
-     * @param  \DateTime|null  $sendAt
+     * @param  \DateTimeInterface|null  $sendAt
      *
      * @return $this
      */
-    public function sendAt(\DateTime $sendAt = null)
+    public function sendAt(\DateTimeInterface $sendAt = null)
     {
         $this->sendAt = $sendAt;
 

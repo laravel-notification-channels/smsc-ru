@@ -63,9 +63,9 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_can_send_a_notification_with_send_at()
+    public function it_can_send_a_deferred_notification()
     {
-        self::$sendAt = date_create();
+        self::$sendAt = new \DateTime();
 
         $this->smsc->shouldReceive('send')->once()
             ->with(
@@ -119,7 +119,8 @@ class TestNotificationWithSendAt extends Notification
 {
     public function toSmscRu()
     {
-        return SmscRuMessage::create('hello')->from('John_Doe')
+        return SmscRuMessage::create('hello')
+            ->from('John_Doe')
             ->sendAt(SmscRuChannelTest::$sendAt);
     }
 }

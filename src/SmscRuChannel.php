@@ -52,7 +52,7 @@ class SmscRuChannel
             'sender'  => $message->from,
         ];
 
-        if ($message->sendAt) {
+        if ($message->sendAt instanceof \DateTimeInterface) {
             $params['time'] = '0'.$message->sendAt->getTimestamp();
         }
 
