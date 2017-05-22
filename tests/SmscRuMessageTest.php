@@ -37,4 +37,22 @@ class SmscRuMessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('John_Doe', $message->from);
     }
+
+    /** @test */
+    public function it_can_set_the_timestamp()
+    {
+        $timestamp = time();
+        $message = (new SmscRuMessage())->timestamp($timestamp);
+
+        $this->assertEquals($timestamp, $message->time);
+    }
+
+    /** @test */
+    public function it_can_set_the_timezone()
+    {
+        $tz = -3;
+        $message = (new SmscRuMessage())->timezone($tz);
+
+        $this->assertEquals($tz, $message->tz);
+    }
 }

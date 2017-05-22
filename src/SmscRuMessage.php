@@ -19,6 +19,20 @@ class SmscRuMessage
     public $content = '';
 
     /**
+     * Time of sending a message.
+     *
+     * @var integer
+     */
+    public $time;
+
+    /**
+     * Timezone of sending a message.
+     *
+     * @var integer
+     */
+    public $tz;
+
+    /**
      * Create a new message instance.
      *
      * @param  string $content
@@ -62,6 +76,40 @@ class SmscRuMessage
     public function from($from)
     {
         $this->from = $from;
+
+        return $this;
+    }
+
+    /**
+     * Set the time the message should be sent.
+     * Accept unix timestamp, ex. 1495459379
+     *
+     * @param  integer  $time
+     *
+     * @return $this
+     */
+    public function timestamp($time)
+    {
+        if (is_int($time)) {
+            $this->time = $time;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the timezone relatively to Europe/Moscow.
+     * The value can be negative.
+     *
+     * @param  integer  $tz
+     *
+     * @return $this
+     */
+    public function timezone($tz)
+    {
+        if (is_int($tz)) {
+            $this->tz = $tz;
+        }
 
         return $this;
     }

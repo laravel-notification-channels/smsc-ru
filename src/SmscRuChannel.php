@@ -52,6 +52,14 @@ class SmscRuChannel
             'sender'  => $message->from,
         ];
 
+        if ($message->time) {
+            $params['time'] = '0' . $message->time;
+        }
+
+        if ($message->tz) {
+            $params['tz'] = $message->tz;
+        }
+
         $this->smsc->send($params);
     }
 }

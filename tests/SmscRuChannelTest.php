@@ -58,6 +58,23 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_send_a_notification_with_time_and_timestamp()
+    {
+        $this->smsc->shouldReceive('send')->once()
+            ->with(
+                [
+                    'phones'  => '+1234567890',
+                    'mes'     => 'hello',
+                    'sender'  => 'John_Doe',
+                    'time'    => 1000000,
+                    'tz'      => -1,
+                ]
+            );
+
+        $this->channel->send(new TestNotifiable(), new TestNotificationWithTimestampAndTimezone());
+    }
+
+    /** @test */
     public function it_does_not_send_a_message_when_to_missed()
     {
         $this->expectException(CouldNotSendNotification::class);
@@ -89,5 +106,13 @@ class TestNotification extends Notification
     public function toSmscRu()
     {
         return SmscRuMessage::create('hello')->from('John_Doe');
+    }
+}
+
+class TestNotificationWithTimestampAndTimezone extends Notification
+{
+    public function toSmscRu()
+    {
+        return SmscRuMessage::create('hello')->from('John_Doe')->timestamp(1000000)->timezone(-1);
     }
 }
