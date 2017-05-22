@@ -52,6 +52,10 @@ class SmscRuChannel
             'sender'  => $message->from,
         ];
 
+        if ($message->sendAt) {
+            $params['time'] = '0'.$message->sendAt->getTimestamp();
+        }
+
         $this->smsc->send($params);
     }
 }

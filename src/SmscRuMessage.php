@@ -19,6 +19,13 @@ class SmscRuMessage
     public $content = '';
 
     /**
+     * Time of sending a message.
+     *
+     * @var \DateTime
+     */
+    public $sendAt;
+
+    /**
      * Create a new message instance.
      *
      * @param  string $content
@@ -62,6 +69,20 @@ class SmscRuMessage
     public function from($from)
     {
         $this->from = $from;
+
+        return $this;
+    }
+
+    /**
+     * Set the time the message should be sent.
+     *
+     * @param  \DateTime|null  $sendAt
+     *
+     * @return $this
+     */
+    public function sendAt(\DateTime $sendAt = null)
+    {
+        $this->sendAt = $sendAt;
 
         return $this;
     }

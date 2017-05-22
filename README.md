@@ -95,6 +95,8 @@ public function routeNotificationForSmsRu()
 
 `content()`: Sets a content of the notification message.
 
+`sendAt()`: Sets a time for scheduling the notification message.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

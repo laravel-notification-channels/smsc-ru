@@ -37,4 +37,13 @@ class SmscRuMessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('John_Doe', $message->from);
     }
+
+    /** @test */
+    public function it_can_set_the_send_at()
+    {
+        $sendAt = date_create();
+        $message = (new SmscRuMessage())->sendAt($sendAt);
+
+        $this->assertEquals($sendAt, $message->sendAt);
+    }
 }

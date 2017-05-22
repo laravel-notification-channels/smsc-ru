@@ -26,6 +26,11 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
      */
     private $channel;
 
+    /**
+     * @var \DateTime
+     */
+    public static $sendAt;
+
     public function setUp()
     {
         parent::setUp();
@@ -55,6 +60,24 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->channel->send(new TestNotifiable(), new TestNotification());
+    }
+
+    /** @test */
+    public function it_can_send_a_notification_with_send_at()
+    {
+        self::$sendAt = date_create();
+
+        $this->smsc->shouldReceive('send')->once()
+            ->with(
+                [
+                    'phones'  => '+1234567890',
+                    'mes'     => 'hello',
+                    'sender'  => 'John_Doe',
+                    'time'    => '0'.self::$sendAt->getTimestamp(),
+                ]
+            );
+
+        $this->channel->send(new TestNotifiable(), new TestNotificationWithSendAt());
     }
 
     /** @test */
@@ -89,5 +112,14 @@ class TestNotification extends Notification
     public function toSmscRu()
     {
         return SmscRuMessage::create('hello')->from('John_Doe');
+    }
+}
+
+class TestNotificationWithSendAt extends Notification
+{
+    public function toSmscRu()
+    {
+        return SmscRuMessage::create('hello')->from('John_Doe')
+            ->sendAt(SmscRuChannelTest::$sendAt);
     }
 }
