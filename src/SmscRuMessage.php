@@ -21,14 +21,14 @@ class SmscRuMessage
     /**
      * Time of sending a message.
      *
-     * @var int
+     * @var \DateTime
      */
     public $time;
 
     /**
      * Timezone of sending a message.
      *
-     * @var int
+     * @var \DateTimeZone
      */
     public $tz;
 
@@ -82,34 +82,28 @@ class SmscRuMessage
 
     /**
      * Set the time the message should be sent.
-     * Accept unix timestamp, ex. 1495459379.
      *
-     * @param  int  $time
+     * @param  \DateTime|null  $time
      *
      * @return $this
      */
-    public function timestamp($time)
+    public function timestamp(\DateTime $time = null)
     {
-        if (is_int($time)) {
-            $this->time = $time;
-        }
+        $this->time = $time;
 
         return $this;
     }
 
     /**
-     * Set the timezone relatively to Europe/Moscow.
-     * The value can be negative.
+     * Set the timezone the message should be sent.
      *
-     * @param  int  $tz
+     * @param  \DateTimeZone  $tz
      *
      * @return $this
      */
-    public function timezone($tz)
+    public function timezone(\DateTimeZone $tz = null)
     {
-        if (is_int($tz)) {
-            $this->tz = $tz;
-        }
+        $this->tz = $tz;
 
         return $this;
     }

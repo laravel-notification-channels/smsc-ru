@@ -41,7 +41,7 @@ class SmscRuMessageTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_set_the_timestamp()
     {
-        $timestamp = time();
+        $timestamp = date_create();
         $message = (new SmscRuMessage())->timestamp($timestamp);
 
         $this->assertEquals($timestamp, $message->time);
@@ -50,7 +50,7 @@ class SmscRuMessageTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_set_the_timezone()
     {
-        $tz = -3;
+        $tz = timezone_open('Europe/Kiev');
         $message = (new SmscRuMessage())->timezone($tz);
 
         $this->assertEquals($tz, $message->tz);

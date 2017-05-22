@@ -26,6 +26,16 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
      */
     private $channel;
 
+    /**
+     * @var \DateTime
+     */
+    public static $timestamp;
+
+    /**
+     * @var \DateTimeZone
+     */
+    public static $timezone;
+
     public function setUp()
     {
         parent::setUp();
@@ -60,14 +70,17 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_send_a_notification_with_time_and_timestamp()
     {
+        self::$timestamp = date_create();
+        self::$timezone = timezone_open('Europe/Moscow');
+
         $this->smsc->shouldReceive('send')->once()
             ->with(
                 [
                     'phones'  => '+1234567890',
                     'mes'     => 'hello',
                     'sender'  => 'John_Doe',
-                    'time'    => 1000000,
-                    'tz'      => -1,
+                    'time'    => '0'.self::$timestamp->getTimestamp(),
+                    'tz'      => 0,
                 ]
             );
 
@@ -113,6 +126,8 @@ class TestNotificationWithTimestampAndTimezone extends Notification
 {
     public function toSmscRu()
     {
-        return SmscRuMessage::create('hello')->from('John_Doe')->timestamp(1000000)->timezone(-1);
+        return SmscRuMessage::create('hello')->from('John_Doe')
+            ->timestamp(SmscRuChannelTest::$timestamp)
+            ->timezone(SmscRuChannelTest::$timezone);
     }
 }
