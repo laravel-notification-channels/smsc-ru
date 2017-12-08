@@ -36,8 +36,8 @@ class SmscRuApiTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_has_custom_config()
     {
-        $host   = 'https://smsc.kz/';
-        $login  = 'login';
+        $host = 'https://smsc.kz/';
+        $login = 'login';
         $secret = 'secret';
         $sender = 'sender';
 
@@ -45,7 +45,7 @@ class SmscRuApiTest extends \PHPUnit_Framework_TestCase
             'host'   => $host,
             'login'  => $login,
             'secret' => $secret,
-            'sender' => $sender
+            'sender' => $sender,
         ]);
 
         $this->assertAttributeEquals('https://smsc.kz/sys/send.php', 'url', $this->smsc);

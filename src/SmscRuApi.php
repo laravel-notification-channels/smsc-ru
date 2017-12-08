@@ -27,7 +27,7 @@ class SmscRuApi
 
     public function __construct($config)
     {
-        $this->url = array_get($config, 'host', 'https://smsc.ru/') . 'sys/send.php';
+        $this->url = array_get($config, 'host', 'https://smsc.ru/').'sys/send.php';
         $this->login = array_get($config, 'login');
         $this->secret = array_get($config, 'secret');
         $this->sender = array_get($config, 'sender');
