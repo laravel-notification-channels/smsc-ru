@@ -2,12 +2,7 @@
 
 namespace NotificationChannel\SmscRu\Tests;
 
-use Mockery as M;
-use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\SmscRuApi;
-use NotificationChannels\SmscRu\SmscRuChannel;
-use NotificationChannels\SmscRu\SmscRuMessage;
-use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuApiTest extends \PHPUnit_Framework_TestCase
 {
