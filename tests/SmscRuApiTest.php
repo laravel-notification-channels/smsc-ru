@@ -53,5 +53,4 @@ class SmscRuApiTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($secret, 'secret', $this->smsc);
         $this->assertAttributeEquals($sender, 'sender', $this->smsc);
     }
-
 }
