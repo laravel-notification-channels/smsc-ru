@@ -38,7 +38,7 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
         $this->smsc = M::mock(SmscRuApi::class, [
             'login' => 'test',
             'secret' => 'test',
-            'sender' => 'John_Doe'
+            'sender' => 'John_Doe',
         ]);
         $this->channel = new SmscRuChannel($this->smsc);
         $this->message = M::mock(SmscRuMessage::class);
