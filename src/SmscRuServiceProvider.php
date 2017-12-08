@@ -11,7 +11,7 @@ class SmscRuServiceProvider extends ServiceProvider
         $this->app->singleton(SmscRuApi::class, function () {
             $config = config('services.smscru');
 
-            return new SmscRuApi($config['login'], $config['secret'], $config['sender']);
+            return new SmscRuApi($config);
         });
     }
 }

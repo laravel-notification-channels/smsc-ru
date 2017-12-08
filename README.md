@@ -57,6 +57,15 @@ Add your SmscRu login, secret key (hashed password) and default sender name (or 
 ...
 ```
 
+> If smsc.ru is not responding, you can set custom host WITH trailing slash
+```
+'smscru' => [
+    ...
+    'host' => 'http://www1.smsc.kz/',
+    ...
+],
+```
+
 ## Usage
 
 You can use the channel in your `via()` method inside the notification:

@@ -10,11 +10,11 @@ class SmscRuApi
 {
     const FORMAT_JSON = 3;
 
-    /** @var string */
-    protected $apiUrl = 'https://smsc.ru/sys/send.php';
-
     /** @var HttpClient */
     protected $httpClient;
+
+    /** @var string */
+    protected $url;
 
     /** @var string */
     protected $login;
@@ -25,11 +25,12 @@ class SmscRuApi
     /** @var string */
     protected $sender;
 
-    public function __construct($login, $secret, $sender)
+    public function __construct($config)
     {
-        $this->login = $login;
-        $this->secret = $secret;
-        $this->sender = $sender;
+        $this->url      = array_get($config, 'host', 'https://smsc.ru/') . 'sys/send.php';
+        $this->login    = array_get($config, 'login');
+        $this->secret   = array_get($config, 'secret');
+        $this->sender   = array_get($config, 'sender');
 
         $this->httpClient = new HttpClient([
             'timeout' => 5,
@@ -57,7 +58,7 @@ class SmscRuApi
         $params = array_merge($params, $base);
 
         try {
-            $response = $this->httpClient->post($this->apiUrl, ['form_params' => $params]);
+            $response = $this->httpClient->post($this->url, ['form_params' => $params]);
 
             $response = json_decode((string) $response->getBody(), true);
 
