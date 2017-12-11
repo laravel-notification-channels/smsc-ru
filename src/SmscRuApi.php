@@ -4,6 +4,7 @@ namespace NotificationChannels\SmscRu;
 
 use DomainException;
 use GuzzleHttp\Client as HttpClient;
+use Illuminate\Support\Arr;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuApi
@@ -25,12 +26,12 @@ class SmscRuApi
     /** @var string */
     protected $sender;
 
-    public function __construct($config)
+    public function __construct(array $config)
     {
-        $this->url = array_get($config, 'host', 'https://smsc.ru/').'sys/send.php';
-        $this->login = array_get($config, 'login');
-        $this->secret = array_get($config, 'secret');
-        $this->sender = array_get($config, 'sender');
+        $this->url = Arr::get($config, 'host', 'https://smsc.ru/') . 'sys/send.php';
+        $this->login = Arr::get($config, 'login');
+        $this->secret = Arr::get($config, 'secret');
+        $this->sender = Arr::get($config, 'sender');
 
         $this->httpClient = new HttpClient([
             'timeout' => 5,

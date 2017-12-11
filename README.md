@@ -57,13 +57,23 @@ Add your SmscRu login, secret key (hashed password) and default sender name (or 
 ...
 ```
 
-> If smsc.ru is not responding, you can set custom host WITH trailing slash
+> If smsc.ru is not responding, you MUST set custom host WITH trailing slash
 ```
+// .env
+...
+SMSCRU_HOST=http://www1.smsc.kz/
+...
+```
+
+```php
+// config/services.php
+...
 'smscru' => [
     ...
-    'host' => 'http://www1.smsc.kz/',
+    'host' => env('SMSCRU_HOST'),
     ...
 ],
+...
 ```
 
 ## Usage
