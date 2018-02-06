@@ -54,7 +54,7 @@ class SmscRuApi
             'fmt'     => self::FORMAT_JSON,
         ];
 
-        $params = array_merge($params, $base);
+        $params = array_merge($base, $params);
 
         try {
             $response = $this->httpClient->post($this->apiUrl, ['form_params' => $params]);
