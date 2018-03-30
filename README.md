@@ -57,7 +57,8 @@ Add your SmscRu login, secret key (hashed password) and default sender name (or 
 ...
 ```
 
-> If smsc.ru is not responding, you MUST set custom host WITH trailing slash
+> If you want use other host than `smsc.ru`, you MUST set custom host WITH trailing slash.
+
 ```
 // .env
 ...

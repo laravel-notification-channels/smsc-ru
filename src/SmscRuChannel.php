@@ -42,7 +42,7 @@ class SmscRuChannel
 
     protected function sendMessage($recipient, SmscRuMessage $message)
     {
-        if (mb_strlen($message->content) > 800) {
+        if (\mb_strlen($message->content) > 800) {
             throw CouldNotSendNotification::contentLengthLimitExceeded();
         }
 

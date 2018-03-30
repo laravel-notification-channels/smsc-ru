@@ -6,9 +6,7 @@ use NotificationChannels\SmscRu\SmscRuApi;
 
 class SmscRuApiTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var SmscRuApi
-     */
+    /** @var SmscRuApi */
     private $smsc;
 
     public function tearDown()
@@ -19,33 +17,27 @@ class SmscRuApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_has_default_url()
+    public function it_has_config_with_default_endpoint()
     {
-        $this->smsc = new SmscRuApi([]);
-        $this->assertAttributeEquals('https://smsc.ru/sys/send.php', 'url', $this->smsc);
-        $this->assertAttributeEquals(null, 'login', $this->smsc);
-        $this->assertAttributeEquals(null, 'secret', $this->smsc);
-        $this->assertAttributeEquals(null, 'sender', $this->smsc);
-    }
-
-    /** @test */
-    public function it_has_custom_config()
-    {
-        $host = 'https://smsc.kz/';
-        $login = 'login';
-        $secret = 'secret';
-        $sender = 'sender';
-
         $this->smsc = new SmscRuApi([
-            'host'   => $host,
-            'login'  => $login,
-            'secret' => $secret,
-            'sender' => $sender,
+            'login'  => $login = 'login',
+            'secret' => $secret = 'secret',
+            'sender' => $sender = 'sender',
         ]);
 
-        $this->assertAttributeEquals('https://smsc.kz/sys/send.php', 'url', $this->smsc);
+        $this->assertAttributeEquals('https://smsc.ru/sys/send.php', 'endpoint', $this->smsc);
         $this->assertAttributeEquals($login, 'login', $this->smsc);
         $this->assertAttributeEquals($secret, 'secret', $this->smsc);
         $this->assertAttributeEquals($sender, 'sender', $this->smsc);
+    }
+
+    /** @test */
+    public function it_has_config_with_custom_endpoint()
+    {
+        $this->smsc = new SmscRuApi([
+            'host' => $host = 'https://smsc.kz/',
+        ]);
+
+        $this->assertAttributeEquals('https://smsc.kz/sys/send.php', 'endpoint', $this->smsc);
     }
 }

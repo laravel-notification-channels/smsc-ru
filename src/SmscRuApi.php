@@ -2,7 +2,6 @@
 
 namespace NotificationChannels\SmscRu;
 
-use DomainException;
 use Illuminate\Support\Arr;
 use GuzzleHttp\Client as HttpClient;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
@@ -12,10 +11,10 @@ class SmscRuApi
     const FORMAT_JSON = 3;
 
     /** @var HttpClient */
-    protected $httpClient;
+    protected $client;
 
     /** @var string */
-    protected $url;
+    protected $endpoint;
 
     /** @var string */
     protected $login;
@@ -28,24 +27,17 @@ class SmscRuApi
 
     public function __construct(array $config)
     {
-        $this->url = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
+        $this->endpoint = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
         $this->login = Arr::get($config, 'login');
         $this->secret = Arr::get($config, 'secret');
         $this->sender = Arr::get($config, 'sender');
 
-        $this->httpClient = new HttpClient([
+        $this->client = new HttpClient([
             'timeout' => 5,
             'connect_timeout' => 5,
         ]);
     }
 
-    /**
-     * @param  array  $params
-     *
-     * @return array
-     *
-     * @throws CouldNotSendNotification
-     */
     public function send($params)
     {
         $base = [
@@ -59,16 +51,16 @@ class SmscRuApi
         $params = \array_merge($base, \array_filter($params));
 
         try {
-            $response = $this->httpClient->post($this->url, ['form_params' => $params]);
+            $response = $this->client->request('POST', $this->endpoint, ['form_params' => $params]);
 
             $response = json_decode((string) $response->getBody(), true);
 
             if (isset($response['error'])) {
-                throw new DomainException($response['error'], $response['error_code']);
+                throw new \DomainException($response['error'], $response['error_code']);
             }
 
             return $response;
-        } catch (DomainException $exception) {
+        } catch (\DomainException $exception) {
             throw CouldNotSendNotification::smscRespondedWithAnError($exception);
         } catch (\Exception $exception) {
             throw CouldNotSendNotification::couldNotCommunicateWithSmsc($exception);
