@@ -3,6 +3,7 @@
 namespace NotificationChannels\SmscRu;
 
 use DomainException;
+use Illuminate\Support\Arr;
 use GuzzleHttp\Client as HttpClient;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
@@ -10,11 +11,11 @@ class SmscRuApi
 {
     const FORMAT_JSON = 3;
 
-    /** @var string */
-    protected $apiUrl = 'https://smsc.ru/sys/send.php';
-
     /** @var HttpClient */
     protected $httpClient;
+
+    /** @var string */
+    protected $url;
 
     /** @var string */
     protected $login;
@@ -25,11 +26,12 @@ class SmscRuApi
     /** @var string */
     protected $sender;
 
-    public function __construct($login, $secret, $sender)
+    public function __construct(array $config)
     {
-        $this->login = $login;
-        $this->secret = $secret;
-        $this->sender = $sender;
+        $this->url = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
+        $this->login = Arr::get($config, 'login');
+        $this->secret = Arr::get($config, 'secret');
+        $this->sender = Arr::get($config, 'sender');
 
         $this->httpClient = new HttpClient([
             'timeout' => 5,
@@ -57,7 +59,7 @@ class SmscRuApi
         $params = \array_merge($base, \array_filter($params));
 
         try {
-            $response = $this->httpClient->post($this->apiUrl, ['form_params' => $params]);
+            $response = $this->httpClient->post($this->url, ['form_params' => $params]);
 
             $response = json_decode((string) $response->getBody(), true);
 
