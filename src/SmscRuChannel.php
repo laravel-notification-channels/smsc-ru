@@ -37,7 +37,7 @@ class SmscRuChannel
             $message = new SmscRuMessage($message);
         }
 
-        $this->sendMessage($to, $message);
+        return $this->sendMessage($to, $message);
     }
 
     protected function sendMessage($recipient, SmscRuMessage $message)
@@ -56,6 +56,6 @@ class SmscRuChannel
             $params['time'] = '0'.$message->sendAt->getTimestamp();
         }
 
-        $this->smsc->send($params);
+        return $this->smsc->send($params);
     }
 }
