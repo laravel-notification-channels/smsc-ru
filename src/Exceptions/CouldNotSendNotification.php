@@ -11,6 +11,7 @@ class CouldNotSendNotification extends Exception
      * Thrown when recipient's phone number is missing.
      *
      * @return static
+     * @deprecated Not used anymore and will be removed in the next major release
      */
     public static function missingRecipient()
     {
