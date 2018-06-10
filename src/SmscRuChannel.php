@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\SmscRu;
 
+use Illuminate\Support\Arr;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
@@ -19,19 +20,19 @@ class SmscRuChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param  Notification  $notification
      *
-     * @throws  \NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification
+     * @return void
      */
     public function send($notifiable, Notification $notification)
     {
-        if (!($to = $this->getRecipients($notifiable, $notification))) {
+        if (! ($to = $this->getRecipients($notifiable, $notification))) {
             return;
         }
 
-        $message = $notification->toSmscRu($notifiable);
+        $message = $notification->{'toSmscRu'}($notifiable);
 
-        if (is_string($message)) {
+        if (\is_string($message)) {
             $message = new SmscRuMessage($message);
         }
 
@@ -42,7 +43,7 @@ class SmscRuChannel
      * Gets a list of phones from the given notifiable.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param  Notification  $notification
      *
      * @return string[]
      */
@@ -50,15 +51,11 @@ class SmscRuChannel
     {
         $to = $notifiable->routeNotificationFor('smscru', $notification);
 
-        if (is_array($to)) {
-            return $to;
-        }
-
         if ($to === null || $to === false || $to === '') {
             return [];
         }
 
-        return [$to];
+        return Arr::wrap($to);
     }
 
     protected function sendMessage($recipients, SmscRuMessage $message)
@@ -68,7 +65,7 @@ class SmscRuChannel
         }
 
         $params = [
-            'phones'  => implode(',', $recipients),
+            'phones'  => \implode(',', $recipients),
             'mes'     => $message->content,
             'sender'  => $message->from,
         ];

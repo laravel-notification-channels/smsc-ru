@@ -27,11 +27,11 @@ class SmscRuApi
 
     public function __construct(array $config)
     {
-        $this->endpoint = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
         $this->login = Arr::get($config, 'login');
         $this->secret = Arr::get($config, 'secret');
         $this->sender = Arr::get($config, 'sender');
-
+        $this->endpoint = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
+        
         $this->client = new HttpClient([
             'timeout' => 5,
             'connect_timeout' => 5,
@@ -53,7 +53,7 @@ class SmscRuApi
         try {
             $response = $this->client->request('POST', $this->endpoint, ['form_params' => $params]);
 
-            $response = json_decode((string) $response->getBody(), true);
+            $response = \json_decode((string) $response->getBody(), true);
 
             if (isset($response['error'])) {
                 throw new \DomainException($response['error'], $response['error_code']);

@@ -8,17 +8,6 @@ use DomainException;
 class CouldNotSendNotification extends Exception
 {
     /**
-     * Thrown when recipient's phone number is missing.
-     *
-     * @return static
-     * @deprecated Not used anymore and will be removed in the next major release
-     */
-    public static function missingRecipient()
-    {
-        return new static('Notification was not sent. Phone number is missing.');
-    }
-
-    /**
      * Thrown when content length is greater than 800 characters.
      *
      * @return static
