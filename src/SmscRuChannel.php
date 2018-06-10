@@ -2,7 +2,6 @@
 
 namespace NotificationChannels\SmscRu;
 
-use Illuminate\Support\Arr;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
@@ -55,7 +54,7 @@ class SmscRuChannel
             return [];
         }
 
-        return Arr::wrap($to);
+        return is_array($to) ? $to : [$to];
     }
 
     protected function sendMessage($recipients, SmscRuMessage $message)
