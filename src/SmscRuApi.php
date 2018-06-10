@@ -31,7 +31,7 @@ class SmscRuApi
         $this->secret = Arr::get($config, 'secret');
         $this->sender = Arr::get($config, 'sender');
         $this->endpoint = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
-        
+
         $this->client = new HttpClient([
             'timeout' => 5,
             'connect_timeout' => 5,
