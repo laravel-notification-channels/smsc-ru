@@ -31,7 +31,9 @@ class SmscRuApi
         $this->login = Arr::get($config, 'login');
         $this->secret = Arr::get($config, 'secret');
         $this->sender = Arr::get($config, 'sender');
-
+        
+        $this->extra_params = Arr::get($config, 'extra_params', []);
+        
         $this->client = new HttpClient([
             'timeout' => 5,
             'connect_timeout' => 5,
@@ -45,11 +47,10 @@ class SmscRuApi
             'login'   => $this->login,
             'psw'     => $this->secret,
             'sender'  => $this->sender,
-            'fmt'     => self::FORMAT_JSON,
-            'op'      => 1,
+            'fmt'     => self::FORMAT_JSON
         ];
 
-        $params = \array_merge($base, \array_filter($params));
+        $params = \array_merge($base, \array_filter($params), $this->extra_params);
 
         try {
             $response = $this->client->request('POST', $this->endpoint, ['form_params' => $params]);
