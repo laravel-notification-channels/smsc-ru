@@ -24,10 +24,10 @@ class SmscRuApi
 
     /** @var string */
     protected $sender;
-    
+
     /** @var array */
     protected $extra_params;
-    
+
     public function __construct(array $config)
     {
         $this->login = Arr::get($config, 'login');
