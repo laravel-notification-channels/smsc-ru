@@ -46,7 +46,7 @@ class SmscRuApi
             'login'   => $this->login,
             'psw'     => $this->secret,
             'sender'  => $this->sender,
-            'fmt'     => self::FORMAT_JSON
+            'fmt'     => self::FORMAT_JSON,
         ];
 
         $params = \array_merge($base, \array_filter($params), $this->extra_params);
