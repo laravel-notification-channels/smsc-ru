@@ -2,6 +2,11 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 2.0.0 - 2018-06-10
+
+- `routeNotificationForSmscru` can return array of phone numbers ([#26](https://github.com/laravel-notification-channels/smsc-ru/issues/26), [#27](https://github.com/laravel-notification-channels/smsc-ru/pull/27))
+- No exception thrown if `routeNotificationForSmscru` returns empty value ([#26](https://github.com/laravel-notification-channels/smsc-ru/issues/26), [#27](https://github.com/laravel-notification-channels/smsc-ru/pull/27))
+
 ## 1.1.6 - 2018-03-30
 
 - Close [#12](https://github.com/laravel-notification-channels/smsc-ru/issues/12)

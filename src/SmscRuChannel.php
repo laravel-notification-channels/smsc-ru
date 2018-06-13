@@ -19,35 +19,52 @@ class SmscRuChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
+     * @param  Notification  $notification
      *
-     * @throws  \NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification
+     * @return void
      */
     public function send($notifiable, Notification $notification)
     {
-        $to = $notifiable->routeNotificationFor('smscru');
-
-        if (empty($to)) {
-            throw CouldNotSendNotification::missingRecipient();
+        if (! ($to = $this->getRecipients($notifiable, $notification))) {
+            return;
         }
 
-        $message = $notification->toSmscRu($notifiable);
+        $message = $notification->{'toSmscRu'}($notifiable);
 
-        if (is_string($message)) {
+        if (\is_string($message)) {
             $message = new SmscRuMessage($message);
         }
 
         return $this->sendMessage($to, $message);
     }
 
-    protected function sendMessage($recipient, SmscRuMessage $message)
+    /**
+     * Gets a list of phones from the given notifiable.
+     *
+     * @param  mixed  $notifiable
+     * @param  Notification  $notification
+     *
+     * @return string[]
+     */
+    protected function getRecipients($notifiable, Notification $notification)
+    {
+        $to = $notifiable->routeNotificationFor('smscru', $notification);
+
+        if ($to === null || $to === false || $to === '') {
+            return [];
+        }
+
+        return is_array($to) ? $to : [$to];
+    }
+
+    protected function sendMessage($recipients, SmscRuMessage $message)
     {
         if (\mb_strlen($message->content) > 800) {
             throw CouldNotSendNotification::contentLengthLimitExceeded();
         }
 
         $params = [
-            'phones'  => $recipient,
+            'phones'  => \implode(',', $recipients),
             'mes'     => $message->content,
             'sender'  => $message->from,
         ];
