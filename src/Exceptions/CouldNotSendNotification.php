@@ -29,7 +29,9 @@ class CouldNotSendNotification extends Exception
     public static function smscRespondedWithAnError(DomainException $exception)
     {
         return new static(
-            "smsc.ru responded with an error '{$exception->getCode()}: {$exception->getMessage()}'"
+            "smsc.ru responded with an error '{$exception->getCode()}: {$exception->getMessage()}'",
+            $exception->getCode(),
+            $exception
         );
     }
 
@@ -42,6 +44,10 @@ class CouldNotSendNotification extends Exception
      */
     public static function couldNotCommunicateWithSmsc(Exception $exception)
     {
-        return new static("The communication with smsc.ru failed. Reason: {$exception->getMessage()}");
+        return new static(
+            "The communication with smsc.ru failed. Reason: {$exception->getMessage()}".
+            $exception->getCode(),
+            $exception
+        );
     }
 }

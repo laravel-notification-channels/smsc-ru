@@ -2,6 +2,11 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 2.0.1 - 2018-09-27
+
+- Updated to support Laravel 5.7
+- Add code and previous exception to exceptions thrown via `smscRespondedWithAnError` and `couldNotCommunicateWithSmsc`
+
 ## 2.0.0 - 2018-06-10
 
 - `routeNotificationForSmscru` can return array of phone numbers ([#26](https://github.com/laravel-notification-channels/smsc-ru/issues/26), [#27](https://github.com/laravel-notification-channels/smsc-ru/pull/27))

@@ -11,24 +11,16 @@ use NotificationChannels\SmscRu\SmscRuMessage;
 
 class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var SmscRuApi
-     */
+    /** @var SmscRuApi|M\MockInterface */
     private $smsc;
 
-    /**
-     * @var SmscRuMessage
-     */
+    /** @var SmscRuMessage */
     private $message;
 
-    /**
-     * @var SmscRuChannel
-     */
+    /** @var SmscRuChannel */
     private $channel;
 
-    /**
-     * @var \DateTime
-     */
+    /** @var \DateTime */
     public static $sendAt;
 
     public function setUp()

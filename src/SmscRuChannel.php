@@ -7,7 +7,7 @@ use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuChannel
 {
-    /** @var \NotificationChannels\SmscRu\SmscRuApi */
+    /** @var SmscRuApi */
     protected $smsc;
 
     public function __construct(SmscRuApi $smsc)
@@ -54,7 +54,7 @@ class SmscRuChannel
             return [];
         }
 
-        return is_array($to) ? $to : [$to];
+        return \is_array($to) ? $to : [$to];
     }
 
     protected function sendMessage($recipients, SmscRuMessage $message)
