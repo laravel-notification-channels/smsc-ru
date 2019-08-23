@@ -2,6 +2,10 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 2.0.3 - 2019-08-23
+
+- Fix wrong parameters error in CouldNotSendNotification ([#33](https://github.com/laravel-notification-channels/smsc-ru/issues/33))
+
 ## 2.0.2 - 2019-04-24
 
 - Updated to support Laravel 5.8
