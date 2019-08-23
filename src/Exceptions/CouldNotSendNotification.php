@@ -45,7 +45,7 @@ class CouldNotSendNotification extends Exception
     public static function couldNotCommunicateWithSmsc(Exception $exception)
     {
         return new static(
-            "The communication with smsc.ru failed. Reason: {$exception->getMessage()}".
+            "The communication with smsc.ru failed. Reason: {$exception->getMessage()}",
             $exception->getCode(),
             $exception
         );
