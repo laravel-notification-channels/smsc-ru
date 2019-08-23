@@ -3,13 +3,14 @@
 namespace NotificationChannel\SmscRu\Tests;
 
 use Mockery as M;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\SmscRu\SmscRuApi;
 use NotificationChannels\SmscRu\SmscRuChannel;
 use NotificationChannels\SmscRu\SmscRuMessage;
 
-class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
+class SmscRuChannelTest extends TestCase
 {
     /** @var SmscRuApi|M\MockInterface */
     private $smsc;
@@ -25,8 +26,6 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        parent::setUp();
-
         $this->smsc = M::mock(SmscRuApi::class, [
             'login' => 'test',
             'secret' => 'test',
@@ -39,12 +38,9 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         M::close();
-
-        parent::tearDown();
     }
 
-    /** @test */
-    public function it_can_send_a_notification()
+    public function test_it_can_send_a_notification()
     {
         $this->smsc->shouldReceive('send')->once()
             ->with(
@@ -58,8 +54,7 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
         $this->channel->send(new TestNotifiable(), new TestNotification());
     }
 
-    /** @test */
-    public function it_can_send_a_deferred_notification()
+    public function test_it_can_send_a_deferred_notification()
     {
         self::$sendAt = new \DateTime();
 
@@ -76,8 +71,7 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
         $this->channel->send(new TestNotifiable(), new TestNotificationWithSendAt());
     }
 
-    /** @test */
-    public function it_does_not_send_a_message_when_to_missed()
+    public function test_it_does_not_send_a_message_when_to_missed()
     {
         $this->smsc->shouldNotReceive('send');
 
@@ -86,8 +80,7 @@ class SmscRuChannelTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /** @test */
-    public function it_can_send_a_notification_to_multiple_phones()
+    public function test_it_can_send_a_notification_to_multiple_phones()
     {
         $this->smsc->shouldReceive('send')->once()
             ->with(
