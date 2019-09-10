@@ -27,13 +27,19 @@ This package makes it easy to send notifications using [smsc.ru](//smsc.ru) (aka
 
 ## Installation
 
-You can install the package via composer:
+Install this package with Composer:
 
 ```bash
 composer require laravel-notification-channels/smsc-ru
 ```
 
-Then you must install the service provider:
+If you're using Laravel 5.x you'll also need to specify a version constraint:
+
+```bash
+composer require laravel-notification-channels/smsc-ru -v 2.0.3
+```
+
+The service provider gets loaded automatically. Or you can do this manually:
 ```php
 // config/app.php
 'providers' => [
