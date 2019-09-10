@@ -8,7 +8,7 @@ use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuApi
 {
-    const FORMAT_JSON = 3;
+    public const FORMAT_JSON = 3;
 
     /** @var HttpClient */
     protected $client;

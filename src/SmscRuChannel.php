@@ -23,7 +23,7 @@ class SmscRuChannel
      *
      * @return void
      */
-    public function send($notifiable, Notification $notification)
+    public function send($notifiable, Notification $notification): void
     {
         if (! ($to = $this->getRecipients($notifiable, $notification))) {
             return;
@@ -46,7 +46,7 @@ class SmscRuChannel
      *
      * @return string[]
      */
-    protected function getRecipients($notifiable, Notification $notification)
+    protected function getRecipients($notifiable, Notification $notification): array
     {
         $to = $notifiable->routeNotificationFor('smscru', $notification);
 
@@ -57,7 +57,7 @@ class SmscRuChannel
         return \is_array($to) ? $to : [$to];
     }
 
-    protected function sendMessage($recipients, SmscRuMessage $message)
+    protected function sendMessage($recipients, SmscRuMessage $message): void
     {
         if (\mb_strlen($message->content) > 800) {
             throw CouldNotSendNotification::contentLengthLimitExceeded();

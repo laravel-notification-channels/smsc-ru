@@ -24,7 +24,7 @@ class SmscRuChannelTest extends TestCase
     /** @var \DateTime */
     public static $sendAt;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->smsc = M::mock(SmscRuApi::class, [
             'login' => 'test',
@@ -35,43 +35,41 @@ class SmscRuChannelTest extends TestCase
         $this->message = M::mock(SmscRuMessage::class);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         M::close();
     }
 
-    public function test_it_can_send_a_notification()
+    public function test_it_can_send_a_notification(): void
     {
-        $this->smsc->shouldReceive('send')->once()
-            ->with(
-                [
-                    'phones'  => '+1234567890',
-                    'mes'     => 'hello',
-                    'sender'  => 'John_Doe',
-                ]
-            );
+        $this->smsc->shouldReceive('send')
+            ->once()
+            ->with([
+                'phones'  => '+1234567890',
+                'mes'     => 'hello',
+                'sender'  => 'John_Doe',
+            ]);
 
         $this->channel->send(new TestNotifiable(), new TestNotification());
     }
 
-    public function test_it_can_send_a_deferred_notification()
+    public function test_it_can_send_a_deferred_notification(): void
     {
         self::$sendAt = new \DateTime();
 
-        $this->smsc->shouldReceive('send')->once()
-            ->with(
-                [
-                    'phones'  => '+1234567890',
-                    'mes'     => 'hello',
-                    'sender'  => 'John_Doe',
-                    'time'    => '0'.self::$sendAt->getTimestamp(),
-                ]
-            );
+        $this->smsc->shouldReceive('send')
+            ->once()
+            ->with([
+                'phones'  => '+1234567890',
+                'mes'     => 'hello',
+                'sender'  => 'John_Doe',
+                'time'    => '0'.self::$sendAt->getTimestamp(),
+            ]);
 
         $this->channel->send(new TestNotifiable(), new TestNotificationWithSendAt());
     }
 
-    public function test_it_does_not_send_a_message_when_to_missed()
+    public function test_it_does_not_send_a_message_when_to_missed(): void
     {
         $this->smsc->shouldNotReceive('send');
 
@@ -80,16 +78,15 @@ class SmscRuChannelTest extends TestCase
         );
     }
 
-    public function test_it_can_send_a_notification_to_multiple_phones()
+    public function test_it_can_send_a_notification_to_multiple_phones(): void
     {
-        $this->smsc->shouldReceive('send')->once()
-            ->with(
-                [
-                    'phones'  => '+1234567890,+0987654321,+1234554321',
-                    'mes'     => 'hello',
-                    'sender'  => 'John_Doe',
-                ]
-            );
+        $this->smsc->shouldReceive('send')
+            ->once()
+            ->with([
+                'phones'  => '+1234567890,+0987654321,+1234554321',
+                'mes'     => 'hello',
+                'sender'  => 'John_Doe',
+            ]);
 
         $this->channel->send(new TestNotifiableWithManyPhones(), new TestNotification());
     }
