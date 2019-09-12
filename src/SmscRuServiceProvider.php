@@ -13,9 +13,11 @@ class SmscRuServiceProvider extends ServiceProvider implements DeferrableProvide
             return new SmscRuApi($app['config']['services.smscru']);
         });
     }
-    
+
     public function provides(): array
     {
-        return [SmscRuApi::class];
+        return [
+            SmscRuApi::class,
+        ];
     }
 }
