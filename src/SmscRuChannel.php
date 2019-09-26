@@ -21,12 +21,14 @@ class SmscRuChannel
      * @param  mixed  $notifiable
      * @param  Notification  $notification
      *
-     * @return void
+     * @throws CouldNotSendNotification
+     *
+     * @return array|null
      */
     public function send($notifiable, Notification $notification)
     {
         if (! ($to = $this->getRecipients($notifiable, $notification))) {
-            return;
+            return null;
         }
 
         $message = $notification->{'toSmscRu'}($notifiable);
@@ -35,7 +37,7 @@ class SmscRuChannel
             $message = new SmscRuMessage($message);
         }
 
-        $this->sendMessage($to, $message);
+        return $this->sendMessage($to, $message);
     }
 
     /**
@@ -50,7 +52,7 @@ class SmscRuChannel
     {
         $to = $notifiable->routeNotificationFor('smscru', $notification);
 
-        if ($to === null || $to === false || $to === '') {
+        if (empty($to)) {
             return [];
         }
 
@@ -73,6 +75,6 @@ class SmscRuChannel
             $params['time'] = '0'.$message->sendAt->getTimestamp();
         }
 
-        $this->smsc->send($params);
+        return $this->smsc->send($params);
     }
 }
