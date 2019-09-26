@@ -12,7 +12,7 @@ class CouldNotSendNotification extends Exception
      *
      * @return static
      */
-    public static function contentLengthLimitExceeded()
+    public static function contentLengthLimitExceeded(): self
     {
         return new static(
             'Notification was not sent. Content length may not be greater than 800 characters.'
@@ -26,7 +26,7 @@ class CouldNotSendNotification extends Exception
      *
      * @return static
      */
-    public static function smscRespondedWithAnError(DomainException $exception)
+    public static function smscRespondedWithAnError(DomainException $exception): self
     {
         return new static(
             "smsc.ru responded with an error '{$exception->getCode()}: {$exception->getMessage()}'",
@@ -42,7 +42,7 @@ class CouldNotSendNotification extends Exception
      *
      * @return static
      */
-    public static function couldNotCommunicateWithSmsc(Exception $exception)
+    public static function couldNotCommunicateWithSmsc(Exception $exception): self
     {
         return new static(
             "The communication with smsc.ru failed. Reason: {$exception->getMessage()}",

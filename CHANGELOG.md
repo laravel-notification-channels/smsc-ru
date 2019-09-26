@@ -2,6 +2,11 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 3.0.0, 2.0.4 - 2019-09-26
+
+- Extra API parameters via config
+- Return API response from `send()`
+
 ## 3.0.0 - 2019-09-10
 
 - Laravel 6.0 & PHP 7.2

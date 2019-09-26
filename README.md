@@ -9,14 +9,14 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/smsc-ru/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/smsc-ru/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/smsc-ru.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/smsc-ru)
 
-This package makes it easy to send notifications using [smsc.ru](//smsc.ru) (aka СМС–Центр) with Laravel 5.3+.
+This package makes it easy to send notifications using [smsc.ru](https://smsc.ru) (aka СМС–Центр) with Laravel 5.3+.
 
 ## Contents
 
 - [Installation](#installation)
     - [Setting up the SmscRu service](#setting-up-the-SmscRu-service)
 - [Usage](#usage)
-    - [Available Message methods](#available-message-methods)
+    - [Available Message methods](#available-methods)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -58,7 +58,11 @@ Add your SmscRu login, secret key (hashed password) and default sender name (or 
 'smscru' => [
     'login'  => env('SMSCRU_LOGIN'),
     'secret' => env('SMSCRU_SECRET'),
-    'sender' => 'John_Doe'
+    'sender' => 'John_Doe',
+    'extra'  => [
+        // any other API parameters
+        // 'tinyurl' => 1
+    ],
 ],
 ...
 ```

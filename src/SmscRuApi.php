@@ -25,12 +25,17 @@ class SmscRuApi
     /** @var string */
     protected $sender;
 
+    /** @var array */
+    protected $extra;
+
     public function __construct(array $config)
     {
         $this->login = Arr::get($config, 'login');
         $this->secret = Arr::get($config, 'secret');
         $this->sender = Arr::get($config, 'sender');
         $this->endpoint = Arr::get($config, 'host', 'https://smsc.ru/').'sys/send.php';
+
+        $this->extra = Arr::get($config, 'extra', []);
 
         $this->client = new HttpClient([
             'timeout' => 5,
@@ -48,7 +53,7 @@ class SmscRuApi
             'fmt'     => self::FORMAT_JSON,
         ];
 
-        $params = \array_merge($base, \array_filter($params));
+        $params = \array_merge($base, \array_filter($params), $this->extra);
 
         try {
             $response = $this->client->request('POST', $this->endpoint, ['form_params' => $params]);
