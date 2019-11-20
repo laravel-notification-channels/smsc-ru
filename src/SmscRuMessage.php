@@ -26,6 +26,28 @@ class SmscRuMessage
     public $sendAt;
 
     /**
+     * Sign of a voice message.
+     * When forming a voice message, you can transfer both text and attach files.
+     * Files added to the message must be transferred using the POST method in the body of the http request.
+     * 0 (default) is a regular message.
+     * 1 - voice message.
+     *
+     * @var boolean
+     */
+    public $call;
+
+    /**
+     * Voice used to read text (for voice messages only).
+     * m (default) - male voice.
+     * m2 is a male alternative voice.
+     * w is a female voice.
+     * w2 is a female alternative voice.
+     *
+     * @var string
+     */
+    public $voice;
+
+    /**
      * Create a new message instance.
      *
      * @param  string $content
@@ -83,6 +105,34 @@ class SmscRuMessage
     public function sendAt(\DateTimeInterface $sendAt = null)
     {
         $this->sendAt = $sendAt;
+
+        return $this;
+    }
+
+    /**
+     * Set the sign of a voice message.
+     *
+     * @param  boolean|null  $call
+     *
+     * @return $this
+     */
+    public function call($call = null)
+    {
+        $this->call = filter_var($call, FILTER_VALIDATE_BOOLEAN);
+
+        return $this;
+    }
+
+    /**
+     * Set the voice used to read text (for voice messages only).
+     *
+     * @param  string  $call
+     *
+     * @return $this
+     */
+    public function voice($voice = null)
+    {
+        $this->voice = $voice;
 
         return $this;
     }
