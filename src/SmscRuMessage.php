@@ -32,7 +32,7 @@ class SmscRuMessage
      * 0 (default) is a regular message.
      * 1 - voice message.
      *
-     * @var boolean
+     * @var bool
      */
     public $call;
 
@@ -112,7 +112,7 @@ class SmscRuMessage
     /**
      * Set the sign of a voice message.
      *
-     * @param  boolean|null  $call
+     * @param  bool|null  $call
      *
      * @return $this
      */
