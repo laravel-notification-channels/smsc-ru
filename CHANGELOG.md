@@ -2,6 +2,10 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 3.0.3 - 2020-03-05
+
+- Updated to support Laravel 7
+
 ## 3.0.2, 2.0.4 - 2019-09-26
 
 - Extra API parameters via config
