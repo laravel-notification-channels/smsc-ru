@@ -2,13 +2,13 @@
 
 namespace NotificationChannel\SmscRu\Tests;
 
-use Mockery as M;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
+use Mockery as M;
 use NotificationChannels\SmscRu\SmscRuApi;
 use NotificationChannels\SmscRu\SmscRuChannel;
 use NotificationChannels\SmscRu\SmscRuMessage;
+use PHPUnit\Framework\TestCase;
 
 class SmscRuChannelTest extends TestCase
 {

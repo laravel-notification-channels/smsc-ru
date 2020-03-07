@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\SmscRu\Test;
 
-use PHPUnit\Framework\TestCase;
 use NotificationChannels\SmscRu\SmscRuMessage;
+use PHPUnit\Framework\TestCase;
 
 class SmscRuMessageTest extends TestCase
 {

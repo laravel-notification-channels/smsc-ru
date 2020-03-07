@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\SmscRu;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 
 class SmscRuServiceProvider extends ServiceProvider implements DeferrableProvider
 {
