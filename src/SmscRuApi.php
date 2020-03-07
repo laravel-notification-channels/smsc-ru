@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\SmscRu;
 
-use Illuminate\Support\Arr;
 use GuzzleHttp\Client as HttpClient;
+use Illuminate\Support\Arr;
 use NotificationChannels\SmscRu\Exceptions\CouldNotSendNotification;
 
 class SmscRuApi
