@@ -19,6 +19,13 @@ class SmscRuMessage
     public $content = '';
 
     /**
+     * The receiver's phone number
+     *
+     * @var array
+     */
+    public $to = [];
+
+    /**
      * Time of sending a message.
      *
      * @var \DateTimeInterface
@@ -69,6 +76,24 @@ class SmscRuMessage
     public function from($from)
     {
         $this->from = $from;
+
+        return $this;
+    }
+
+    /**
+     * Set the receiver's phone number.
+     *
+     * @param string|array $to
+     *
+     * @return $this
+     */
+    public function to($to)
+    {
+        if (!is_array($to)) {
+            $to = [$to];
+        }
+
+        $this->to = $to;
 
         return $this;
     }

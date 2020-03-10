@@ -90,6 +90,19 @@ class SmscRuChannelTest extends TestCase
 
         $this->channel->send(new TestNotifiableWithManyPhones(), new TestNotification());
     }
+
+    public function test_it_can_send_a_notification_to_receiver_from_message(): void
+    {
+        $this->smsc->shouldReceive('send')
+            ->once()
+            ->with([
+                'phones'  => '+1234567111',
+                'mes'     => 'hello',
+                'sender'  => 'John_Doe',
+            ]);
+
+        $this->channel->send(new TestNotifiable(), new TestNotificationWithReceiverInMessage());
+    }
 }
 
 class TestNotifiable
@@ -135,5 +148,15 @@ class TestNotificationWithSendAt extends Notification
         return SmscRuMessage::create('hello')
             ->from('John_Doe')
             ->sendAt(SmscRuChannelTest::$sendAt);
+    }
+}
+
+class TestNotificationWithReceiverInMessage extends Notification
+{
+    public function toSmscRu()
+    {
+        return SmscRuMessage::create('hello')
+            ->from('John_Doe')
+            ->to('+1234567111');
     }
 }

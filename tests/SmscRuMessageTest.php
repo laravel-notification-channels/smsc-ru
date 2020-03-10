@@ -41,4 +41,18 @@ class SmscRuMessageTest extends TestCase
 
         $this->assertEquals($sendAt, $message->sendAt);
     }
+
+    public function test_it_can_set_the_to_as_string(): void
+    {
+        $message = (new SmscRuMessage())->to($to = 'test phone');
+
+        $this->assertEquals($to, $message->to[0]);
+    }
+
+    public function test_it_can_set_the_to_as_array(): void
+    {
+        $message = (new SmscRuMessage())->to($to = ['test phone']);
+
+        $this->assertEquals($to, $message->to);
+    }
 }
