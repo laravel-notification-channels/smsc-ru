@@ -27,14 +27,18 @@ class SmscRuChannel
      */
     public function send($notifiable, Notification $notification): ?array
     {
-        if (! ($to = $this->getRecipients($notifiable, $notification))) {
-            return null;
-        }
-
         $message = $notification->{'toSmscRu'}($notifiable);
 
         if (\is_string($message)) {
             $message = new SmscRuMessage($message);
+        }
+
+        $to = $message->to;
+
+        if (empty($to)) {
+            if (! ($to = $this->getRecipients($notifiable, $notification))) {
+                return null;
+            }
         }
 
         return $this->sendMessage($to, $message);
