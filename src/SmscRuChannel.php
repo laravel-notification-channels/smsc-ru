@@ -75,6 +75,14 @@ class SmscRuChannel
             $params['time'] = '0'.$message->sendAt->getTimestamp();
         }
 
+        if ($message->call) {
+            $params['call'] = $message->call ? 1 : 0;
+        }
+
+        if ($message->voice) {
+            $params['voice'] = $message->voice;
+        }
+
         return $this->smsc->send($params);
     }
 }
