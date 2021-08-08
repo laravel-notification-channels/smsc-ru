@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannel\SmscRu\Tests;
+namespace NotificationChannels\SmscRu\Test;
 
 use NotificationChannels\SmscRu\SmscRuApi;
 use PHPUnit\Framework\TestCase;

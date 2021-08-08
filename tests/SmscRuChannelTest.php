@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannel\SmscRu\Tests;
+namespace NotificationChannels\SmscRu\Test;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;

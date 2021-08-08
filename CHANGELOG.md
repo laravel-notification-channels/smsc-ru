@@ -2,6 +2,11 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 3.2.0 - 2021-09-08
+
+- Updated to support PHP 8.0
+- Fix wrong namespace in some test classes
+
 ## 3.1.0 - 2020-09-12
 
 - Updated to support Laravel 8
