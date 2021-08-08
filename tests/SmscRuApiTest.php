@@ -32,7 +32,8 @@ class SmscRuApiTest extends TestCase
 
     private function getExtendedSmscRuApi(array $config)
     {
-        return new class($config) extends SmscRuApi {
+        return new class($config) extends SmscRuApi
+        {
             public function getEndpoint(): string
             {
                 return $this->endpoint;
