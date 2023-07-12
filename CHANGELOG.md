@@ -2,6 +2,10 @@
 
 All notable changes to `smsc-ru` will be documented in this file
 
+## 3.4.0 - 2022-07-12
+
+- Updated to support Laravel 10
+
 ## 3.3.0 - 2022-06-30
 
 - Updated to support Laravel 9
