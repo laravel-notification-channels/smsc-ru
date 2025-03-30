@@ -1,5 +1,8 @@
 # Changelog
 
+- Updated to support Laravel 12
+## 3.6.0 - 2025-03-30
+
 All notable changes to `smsc-ru` will be documented in this file
 ## 3.5.0 - 2024-12-14
 
